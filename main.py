@@ -2,11 +2,6 @@ import requests
 import sys
 import json
 import re
-    # -H "Accept: application/vnd.github+json" \
-    # -H "Authorization: Bearer <YOUR-TOKEN>" \
-    # -H "X-GitHub-Api-Version: 2022-11-28" \
-    # https://api.github.com/orgs/ORG/repos
-
 
 def main():
     org = sys.argv[1]
@@ -14,12 +9,18 @@ def main():
 
 def getRepositories(org):
     token = ""
-    with open("token.txt") as my_file:
-        token = my_file.read()
-    
+    try:
+        with open("token.txt") as my_file:
+            token = my_file.read()
+    except:
+        print('token.txt not found')
     results = []
-
-    headers = {'Authorization': 'token ' + token}
+    
+    if len(token) > 0:
+        headers = {'Authorization': 'token ' + token}
+    else:
+        print('API token not found in token.txt')
+        headers = ''
     link = f"https://api.github.com/orgs/{org}/repos?per_page=1000"
     while link:
         response = requests.get(link, headers = headers)
