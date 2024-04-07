@@ -27,38 +27,15 @@ def getRepositories(org):
         for repo in response.json():
                 results.append({
                     "repository": repo.get('name'),
-                    "secret_scanning": repo.get('security_and_analysis').get('secret_scanning').get('status') if repo.get('security_and_analysis') else "Unavailable"
+                    "secret_scanning": repo.get('security_and_analysis').get('secret_scanning').get('status') if repo.get('security_and_analysis') else "unavailable"
                 })
         link = None
         if response.headers.get("Link"):
             match = re.search('(?<=<)([\S]*)(?=>; rel="Next")', response.headers.get("Link"), re.IGNORECASE)
             if match:
                 link = match.group()
-        
-            
 
-    # print(json.dumps(response.json(),indent=2)) 
-    # print(response.json())
-    
-    
-        # print(f"Repository name: {repo.get('name')} Secret scanning: {repo.get('security_and_analysis').get('secret_scanning').get('status')}")
     print(json.dumps(results, indent=4))
- 
-    # Writing to sample.json
-    
-        
-    
-    # print(f"Repository name: {repo.get('name')} Secret scanning: {repo.get('security_and_analysis').get('secret_scanning').get('status')}")
-    # AttributeError: 'NoneType' object has no attribute 'get' -> cannot access other people's organisations
-    # SOLUTION: pagination with items per page
-
-'''
-    What would you do when using the tool to extract data for lots of organisations without hitting the rate limit?
-    
-    How would you good runtime performance when extracting data for lots of organisations
-    
-    How would you schedule such a tool to monitor a set of organisations on regular basis
-'''
 
 if __name__ == '__main__':
     main()

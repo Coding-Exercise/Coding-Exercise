@@ -12,3 +12,7 @@ pip3 install -r requirements.txt
 ```
 python3 main.py eclipse-cbi
 ```
+
+ 
+### Note: 
+[Per the documentation,](https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-organization-repositories) in order to see the security_and_analysis block for a repository you must have admin permissions for the repository or be an owner or security manager for the organization that owns the repository.
