@@ -5,9 +5,9 @@ import re
 
 def main():
     org = sys.argv[1]
-    getRepositories(org)
+    get_repositories(org)
 
-def getRepositories(org):
+def get_repositories(org):
     token = ""
     try:
         with open("token.txt") as my_file:
